@@ -27,6 +27,8 @@ var addButtons = function() {
         var todoInput = e('#id-input-todo')
         var todo = todoInput.value
         // 添加到 container 中
+        var input = e('#id-input-todo')
+        input.value = ''
         insertTodo(todo, false, now())
         // 添加之后 保存 todos
         saveTodos()
@@ -114,12 +116,15 @@ var toggleButton = function () {
             // 改变 todo 完成状态之后，保存 todos
             saveTodos()
         } else if (target.classList.contains('todo-delete')) {
-            // log('delete')
-            // 找到按钮的父节点并且删除
-            var todoDiv = target.parentElement
-            todoDiv.remove()
-            // 删除之后 保存 todos
-            saveTodos()
+            // 弹出提示框
+            var msg = "您真的确定要删除吗？\n\n请确认！";
+            if (confirm(msg)==true){
+                // 找到按钮的父节点并且删除
+                var todoDiv = target.parentElement
+                todoDiv.remove()
+                // 删除之后 保存 todos
+                saveTodos()
+            }
         }
     })
 }
